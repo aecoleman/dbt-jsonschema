@@ -1,6 +1,9 @@
 {
     "title": "dbt_yml_files",
     "type": "object",
+    "$defs": {
+
+    },
     "required": ["version"],
     "additionalProperties": false,
     "properties": {
@@ -17,6 +20,32 @@
                     },
                     "description": {
                         "type": "string"
+                    },
+                    "docs": {
+                        "type": "object",
+                        "required": ["show"],
+                        "properties": {
+                            "show": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "tests": {
+                        "type": "array",
+                        "items": {
+                            "type": ["string", "object"]
+                        },
+                        "minItems": 1
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1
+                    },
+                    "meta" : {
+                        "type": "object"
                     },
                     "columns": {
                         "type": "array",
@@ -35,16 +64,367 @@
                                     "type": "array",
                                     "items": {
                                         "type": ["string", "object"]
-                                    }
+                                    },
+                                    "minItems": 1
+                                },
+                                "tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "minItems": 1
+                                },
+                                "metadata" : {
+                                    "type": "object"
+                                },
+                                "quote": {
+                                    "type": "boolean"
+                                },
+                                "config": {
+                                    "type": "object"
                                 }
-
                             }
 
                         }
                     }
                 }
             }
+        },
+        "sources": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["name", "tables"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "database": {
+                        "type": "string"
+                    },
+                    "schema": {
+                        "type": "string"
+                    },
+                    "loader": {
+                        "type": "string"
+                    },
+                    "loaded_at_field": {
+                        "type": "string"
+                    },
+                    "meta" : {
+                        "type": "object"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1
+                    },
+                    "overrides": {
+                        "type": "string"
+                    },
+                    "freshness": {
+                        "type": "object",
+                        "required": ["warn_after", "error_after"],
+                        "properties": {
+                            "warn_after": {
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "minimum": 1
+                                    },
+                                    "period": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "error_after" : {
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "minimum": 1
+                                    },
+                                    "period": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "filter": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "quoting": {
+                        "type": "object",
+                        "required": ["database", "schema", "identifier"],
+                        "properties": {
+                            "database": {
+                                "type": "boolean"
+                            },
+                            "schema": {
+                                "type": "boolean"
+                            },
+                            "identifier": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "tables": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": "name",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "meta" : {
+                                    "type": "object"
+                                },
+                                "identifier" : {
+                                    "type": "string"
+                                },
+                                "loaded_at_field": {
+                                    "type": "string"
+                                },
+                                "tests": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": ["string", "object"]
+                                    },
+                                    "minItems": 1
+                                },
+                                "tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "minItems": 1
+                                },
+                                "freshness": {
+                                    "type": "object",
+                                    "required": ["warn_after", "error_after"],
+                                    "properties": {
+                                        "warn_after": {
+                                            "type": "object",
+                                            "properties": {
+                                                "count": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                },
+                                                "period": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "error_after" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "count": {
+                                                    "type": "integer",
+                                                    "minimum": 1
+                                                },
+                                                "period": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "filter": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "quoting": {
+                                    "type": "object",
+                                    "required": ["database", "schema", "identifier"],
+                                    "properties": {
+                                        "database": {
+                                            "type": "boolean"
+                                        },
+                                        "schema": {
+                                            "type": "boolean"
+                                        },
+                                        "identifier": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "external": {
+                                    "type": "object"
+                                },
+                                "columns": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "required": "name",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "tests": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": ["string", "object"]
+                                                },
+                                                "minItems": 1
+                                            },
+                                            "tags": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "minItems": 1
+                                            },
+                                            "meta" : {
+                                                "type": "object"
+                                            },
+                                            "quote": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "seeds": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "docs": {
+                        "type": "object",
+                        "required": ["show"],
+                        "properties": {
+                            "show": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "config": {
+                        "type": "object"
+                    },
+                    "tests": {
+                        "type": "array",
+                        "items": {
+                            "type": ["string", "object"]
+                        },
+                        "minItems": 1
+                    },
+                    "columns": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": ["name"],
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "meta": {
+                                    "type": "object"
+                                },
+                                "quote": {
+                                    "type": "boolean"
+                                },
+                                "tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "minItems": 1
+                                },
+                                "tests": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": ["string", "object"]
+                                    },
+                                    "minItems": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "exposures": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["name", "type", "url", "maturity", "owner", "depends_on"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "maturity": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1
+                    },
+                    "meta" : {
+                        "type": "object"
+                    },
+                    "owner": {
+                        "type": "object",
+                        "required": ["name", "email"],
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "depends_on": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "minItems": 1
+                    }
+                }
+            }
         }
-
     }
 }
