@@ -8,10 +8,148 @@
             "type": "string"
         },
         "version": {
-            "type": "number"
+            "type": "string"
         },
         "config-version": {
-            "type": "number"
+            "type": "integer",
+            "minimum": 1
+        },
+        "profile": {
+            "type": "string"
+        },
+        "model-paths": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "seed-paths": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "test-paths": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "analysis-paths": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "macro-paths": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "snapshot-paths": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "docs-paths": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "asset-paths": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "target-path": {
+            "type": "string"
+        },
+        "log-path": {
+            "type": "string"
+        },
+        "packages-install-path": {
+            "type": "string"
+        },
+        "clean-targets": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "query-comment": {
+            "type": "string"
+        },
+        "require-dbt-version": {
+            "description": "Require a particular version of dbt to run the project, e.g. \">=1.0.0\" (including quotes) to require dbt v1.0.0 or newer",
+            "type": "string"
+        },
+        "quoting": {
+            "type": "object",
+            "properties": {
+                "database": {
+                    "type": "boolean"
+                },
+                "schema": {
+                    "type": "boolean"
+                },
+                "identifier": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "models": {
+            "type": "object"
+        },
+        "seeds": {
+            "type": "object"
+        },
+        "snapshots": {
+            "type": "object"
+        },
+        "sources": {
+            "type": "object"
+        },
+        "tests": {
+            "type": "object"
+        },
+        "vars": {
+            "type": "object"
+        },
+        "on-run-start": {
+            "type": "string"
+        },
+        "on-run-end": {
+            "type": "string"
+        },
+        "dispatch": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["macro_namespace", "search_order"],
+                "properties": {
+                    "macro_namespace": {
+                        "type": "string"
+                    },
+                    "search_order": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     }
 }
