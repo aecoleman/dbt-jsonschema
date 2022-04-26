@@ -40,22 +40,13 @@
                     "overrides": { "type": "string" },
                     "freshness": {
                         "type": "object",
-                        "required": ["warn_after", "error_after"],
                         "properties": {
                             "warn_after": { "$ref": "#/$defs/freshness_warn_error" },
                             "error_after" : { "$ref": "#/$defs/freshness_warn_error" },
                             "filter": { "type": "string" }
                         }
                     },
-                    "quoting": {
-                        "type": "object",
-                        "required": ["database", "schema", "identifier"],
-                        "properties": {
-                            "database": { "type": "boolean" },
-                            "schema": { "type": "boolean" },
-                            "identifier": { "type": "boolean" }
-                        }
-                    },
+                    "quoting": { "$ref": "#/$defs/quoting" },
                     "tables": {
                         "type": "array",
                         "items": {
@@ -78,15 +69,7 @@
                                         "filter": { "type": "string" }
                                     }
                                 },
-                                "quoting": {
-                                    "type": "object",
-                                    "required": ["database", "schema", "identifier"],
-                                    "properties": {
-                                        "database": { "type": "boolean" },
-                                        "schema": { "type": "boolean" },
-                                        "identifier": { "type": "boolean" }
-                                    }
-                                },
+                                "quoting": { "$ref": "#/$defs/quoting" },
                                 "external": { "type": "object" },
                                 "columns": { "$ref": "#/$defs/columns" }
                             }
@@ -278,6 +261,14 @@
                     "type": "string",
                     "enum": ["minute", "hour", "day"]
                 }
+            }
+        },
+        "quoting": {
+            "type": "object",
+            "properties": {
+                "database": { "type": "boolean" },
+                "schema": { "type": "boolean" },
+                "identifier": { "type": "boolean" }
             }
         },
         "columns": {
